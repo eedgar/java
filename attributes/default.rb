@@ -20,9 +20,10 @@
 # remove the deprecated Ubuntu jdk packages
 default['java']['remove_deprecated_packages'] = false
 
-# default jdk attributes
+# default jdk/jre attributes
 default['java']['install_flavor'] = "openjdk"
 default['java']['jdk_version'] = '6'
+default['java']['jre_version'] = '6'
 default['java']['arch'] = kernel['machine'] =~ /x86_64/ ? "x86_64" : "i586"
 default['java']['bin_cmds'] = ['java','jar']
 

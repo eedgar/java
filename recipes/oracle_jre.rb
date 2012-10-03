@@ -20,20 +20,20 @@
 
 java_home = node['java']["java_home"]
 arch = node['java']['arch']
-jdk_version = node['java']['jdk_version']
+jre_version = node['java']['jre_version']
 
 #convert version number to a string if it isn't already
-if jdk_version.instance_of? Fixnum
-  jdk_version = jdk_version.to_s
+if jre_version.instance_of? Fixnum
+  jre_version = jre_version.to_s
 end
 
-case jdk_version
+case jre_version
 when "6"
-  tarball_url = node['java']['jdk']['6'][arch]['url']
-  tarball_checksum = node['java']['jdk']['6'][arch]['checksum']
+  tarball_url = node['java']['jre']['6'][arch]['url']
+  tarball_checksum = node['java']['jre']['6'][arch]['checksum']
 when "7"
-  tarball_url = node['java']['jdk']['7'][arch]['url']
-  tarball_checksum = node['java']['jdk']['7'][arch]['checksum']
+  tarball_url = node['java']['jre']['7'][arch]['url']
+  tarball_checksum = node['java']['jre']['7'][arch]['checksum']
 end
 
 ruby_block  "set-env-java-home" do
@@ -42,7 +42,7 @@ ruby_block  "set-env-java-home" do
   end
 end
 
-file "/etc/profile.d/jdk.sh" do
+file "/etc/profile.d/jre.sh" do
   content <<-EOS
     export JAVA_HOME=#{node['java']["java_home"]}
   EOS
@@ -50,11 +50,10 @@ file "/etc/profile.d/jdk.sh" do
 end
 
 
-java_ark "jdk" do
+java_ark "jre" do
   url tarball_url
   checksum tarball_checksum
   app_home java_home
-  bin_cmds [ "java", "javac" ] 
+  bin_cmds [ "java" ] 
   action :install
 end
-
