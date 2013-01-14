@@ -127,7 +127,19 @@ action :install do
     converge_by(description) do
        tmpdir = Dir.mktmpdir
        case tarball_name
+       when /^jre.*(?!rpm)\.bin/
+         Chef::Log.debug("Extracting #{tarball_name} to #{tmpdir}")
+         cmd = Chef::ShellOut.new(
+                                  %Q[ cd "#{tmpdir}";
+                                      cp "#{Chef::Config[:file_cache_path]}/#{tarball_name}" . ;
+                                      bash ./#{tarball_name};
+                                      mkdir -p /usr/java/default
+                                    ] ).run_command
+         unless cmd.exitstatus == 0
+           Chef::Application.fatal!("Failed to extract file #{tarball_name}!")
+         end
        when /^.*\.bin/
+         Chef::Log.debug("Extracting #{tarball_name} to #{tmpdir}")
          cmd = Chef::ShellOut.new(
                                   %Q[ cd "#{tmpdir}";
                                       cp "#{Chef::Config[:file_cache_path]}/#{tarball_name}" . ;
@@ -158,7 +170,7 @@ action :install do
        unless cmd.exitstatus == 0
            Chef::Application.fatal!(%Q[ Command \' mv "#{tmpdir}/#{app_dir_name}" "#{app_dir}" \' failed ])
          end
-       FileUtils.rm_r tmpdir
+       #FileUtils.rm_r tmpdir
      end
   end
 

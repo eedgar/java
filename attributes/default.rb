@@ -23,6 +23,7 @@ default['java']['remove_deprecated_packages'] = false
 # default jdk attributes
 default['java']['install_flavor'] = "openjdk"
 default['java']['jdk_version'] = '6'
+default['java']['jre_version'] = '6'
 default['java']['arch'] = kernel['machine'] =~ /x86_64/ ? "x86_64" : "i586"
 
 case platform
@@ -60,6 +61,17 @@ default['java']['jdk']['6']['x86_64']['checksum'] = '51d594cec29948bdf58918ba802
 default['java']['jdk']['6']['i586']['url'] = 'http://download.oracle.com/otn-pub/java/jdk/6u37-b06/jdk-6u37-linux-i586.bin'
 default['java']['jdk']['6']['i586']['checksum'] = '44cc51ed452a08a3e0b4e397922832607161642e5a6e206f256af86f8fbaae90'
 
+# jre6 attributes
+default['java']['jre']['6']['bin_cmds'] = [ "ControlPanel", "java" ,"java_vm", "javaws", "jcontrol", "keytool", "orbd", "pack200",
+                                          "policytool", "rmid", "rmiregistry", "servertool", "tnameserv", "unpack200"]
+# x86_64
+default['java']['jre']['6']['x86_64']['url'] = 'http://download.oracle.com/otn-pub/java/jdk/6u38-b05/jre-6u38-linux-x64.bin'
+default['java']['jre']['6']['x86_64']['checksum'] = '594791f98febf4a0c9723f86cf033a5905a13817a952952138a8f9d407913b23'
+
+# i586
+default['java']['jre']['6']['i586']['url'] = 'http://download.oracle.com/otn-pub/java/jdk/6u38-b05/jre-6u38-linux-i586.bin'
+default['java']['jre']['6']['i586']['checksum'] = '51d594cec29948bdf58918ba802a872826bc7caae3f0aada42b65eacdc14a7f4'
+
 # jdk7 attributes
 
 default['java']['jdk']['7']['bin_cmds'] = [ "appletviewer", "apt", "ControlPanel", "extcheck", "idlj", "jar", "jarsigner", "java", "javac", 
@@ -75,3 +87,14 @@ default['java']['jdk']['7']['x86_64']['checksum'] = '1b39fe2a3a45b29ce89e10e59be
 # i586
 default['java']['jdk']['7']['i586']['url'] = 'http://download.oracle.com/otn-pub/java/jdk/7u9-b05/jdk-7u9-linux-i586.tar.gz'
 default['java']['jdk']['7']['i586']['checksum'] = '47e86ceb7f59c821a8d0c54f34530bca84e10c1849ed46da7f4fdb5f621bc8d6'
+
+# jre7 attributes
+default['java']['jre']['7']['bin_cmds'] = [ "ControlPanel", "java" ,"java_vm", "javaws", "jcontrol", "keytool", "orbd", "pack200",
+                                          "policytool", "rmid", "rmiregistry", "servertool", "tnameserv", "unpack200"]
+# x86_64
+default['java']['jre']['7']['x86_64']['url'] = 'http://download.oracle.com/otn-pub/java/jdk/7u11-b21/jre-7u11-linux-x64.tar.gz'
+default['java']['jre']['7']['x86_64']['checksum'] = '1b39fe2a3a45b29ce89e10e59be9fbb671fb86c13402e29593ed83e0b419c8d7'
+
+# i586
+default['java']['jre']['7']['i586']['url'] = 'http://download.oracle.com/otn-pub/java/jdk/7u11-b21/jre-7u11-linux-i586.tar.gz'
+default['java']['jre']['7']['i586']['checksum'] = '47e86ceb7f59c821a8d0c54f34530bca84e10c1849ed46da7f4fdb5f621bc8d6'
